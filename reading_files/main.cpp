@@ -5,9 +5,9 @@
 #include <filesystem>
 #include <sstream>
 #include <vector>
-#include <json/value.h>
-
-using namespace std;
+#include <math.h>
+#include <algorithm>
+// #include <json/value.h>
 
 int main() {
 
@@ -45,9 +45,9 @@ int main() {
 
     // reading data (.csv)
     // using vector
-    vector<vector<string>> content;
-    vector<string> row;
-    string line, word;
+    std::vector<std::vector<std::string>> content;
+    std::vector<std::string> row;
+    std::string line, word;
 
     // fstream file (csv_datafile, ios::in);
     std::cout << "csv datafile path: " << csv_datafile << std::endl;
@@ -55,7 +55,7 @@ int main() {
     if (newfile.is_open()){
         while (getline(newfile, line)){
             row.clear();
-            stringstream str(line);
+            std::stringstream str(line);
             while (getline(str, word, ','))
                 row.push_back(word);
             content.push_back(row);
@@ -63,7 +63,7 @@ int main() {
         newfile.close();
     }
     else {
-        cout << "Could not open the file\n";
+        std::cout << "Could not open the file\n";
     }
 
     // for (vector<vector<string>>::iterator row = content.begin(); row != content.end(); row++) {
@@ -74,15 +74,15 @@ int main() {
 
     for (auto& row : content) {
         // cout << "size: " << row.size() << "\n";
-        int size = row.size();
-        for (int i=0; i<row.size()-1; i++){
-            cout << row[i] << ", ";
+        uint last_idx = std::max(uint(row.size() - 1), uint(0));
+        for (uint i=0; i<last_idx; i++){
+            std::cout << row[i] << ", ";
         }
-        cout << row[size - 1] << "\n";
+        std::cout << row[last_idx] << "\n";
     }
 
     // using .json data
-    vector<vector<string>> json_data;
+    std::vector<std::vector<std::string>> json_data;
 
 
     free(workdir);
