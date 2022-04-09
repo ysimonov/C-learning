@@ -12,7 +12,8 @@
 int main() {
 
     // Get path to the file (workdir)
-    char *workdir = get_current_dir_name();
+    char buffer[200];
+    char *workdir = getcwd(buffer, sizeof(buffer));
     std::cout << "Current working directory: " << workdir << std::endl;
 
     std::string txt_datafile = std::string(workdir) + "/data.txt";
@@ -74,8 +75,8 @@ int main() {
 
     for (auto& row : content) {
         // cout << "size: " << row.size() << "\n";
-        uint last_idx = std::max(uint(row.size() - 1), uint(0));
-        for (uint i=0; i<last_idx; i++){
+        int last_idx = std::max(int(row.size() - 1), int(0));
+        for (int i=0; i<last_idx; i++){
             std::cout << row[i] << ", ";
         }
         std::cout << row[last_idx] << "\n";
@@ -83,7 +84,6 @@ int main() {
 
     // using .json data
     std::vector<std::vector<std::string>> json_data;
-
 
     free(workdir);
     return 0;

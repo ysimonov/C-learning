@@ -1,0 +1,9 @@
+from typing_extensions import Protocol
+
+class PyRectangle(Protocol):
+    
+    def get_area(self) -> None: ...
+
+    def get_size(self) -> None: ...
+
+    def move(self, dx: float, dy: float) -> None: ...

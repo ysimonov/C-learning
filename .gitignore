@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Custom files / folders
+rect.cpp
+*.pyd
+*.so
+build
